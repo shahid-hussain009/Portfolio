@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Login } from './components/AuthCompnent/Login';
+import { SignUp } from './components/AuthCompnent/SignUp';
+import { ProfileContext } from './components/hooks/ProfileContext';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [img_url, setImg_url] = useState('');
+    return (
+        <>
+            <ProfileContext.Provider value={{ img_url, setImg_url }}>
+                <Router>
+                    <Routes>
+                        <Route path="/sign-up" element={<SignUp/>} />
+                        <Route path="/login" element={<Login/>} />
+                    </Routes>
+                </Router>
+            </ProfileContext.Provider>
+        </>
+    );
 }
 
 export default App;
