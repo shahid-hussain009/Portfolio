@@ -19,7 +19,8 @@ import {
     Lock,
     Google,
     Facebook,
-    GitHub
+    GitHub,
+    Person
 } from '@mui/icons-material';
 
 const UI_M = {
@@ -40,7 +41,8 @@ const UI_M = {
     Lock,
     Google,
     Facebook,
-    GitHub
+    GitHub,
+    Person
 }
 export default UI_M;
 

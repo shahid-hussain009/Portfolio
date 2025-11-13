@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 
 import UI_M from '../../MUI/MUI';
 import './auth.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Login = () => {
-    const [formData, setFormData] = useState({
+    const navigate = useNavigate();
+
+    const loginForm = {
         email: '',
         password: ''
-    });
-    const [errors, setErrors] = useState({
-        email: '',
-        password: ''
-    });
+    }
+    /**
+     * Form Data State
+     */
+    const [formData, setFormData] = useState(loginForm);
+    /**
+     * Error State
+     */
+    const [errors, setErrors] = useState(loginForm);
+
     const [showPassword, setShowPassword] = useState(false);
     const [submitStatus, setSubmitStatus] = useState('');
 
@@ -54,10 +62,11 @@ export const Login = () => {
         if (validateForm()) {
             console.log('Login data:', formData);
             setSubmitStatus('success');
-            setFormData({ email: '', password: '' });
+            setFormData(loginForm);
 
             setTimeout(() => {
                 setSubmitStatus('');
+                navigate('/dashboard');
             }, 3000);
         } else {
             setSubmitStatus('error');
@@ -119,7 +128,7 @@ export const Login = () => {
                                 className="alert-rounded"
                                 sx={{ width: '100%', mb: 2 }}
                             >
-                                Please fix the errors above and try again.
+                                Please fix the errors and try again.
                             </UI_M.Alert>
                         )}
 
@@ -127,12 +136,11 @@ export const Login = () => {
                         <UI_M.Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '100%' }}>
                             <UI_M.TextField
                                 margin="normal"
-                                required
+
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                autoComplete="email"
                                 autoFocus
                                 value={formData.email}
                                 onChange={handleChange}
@@ -150,7 +158,7 @@ export const Login = () => {
 
                             <UI_M.TextField
                                 margin="normal"
-                                required
+
                                 fullWidth
                                 name="password"
                                 label="Password"
@@ -248,13 +256,15 @@ export const Login = () => {
                             <UI_M.Box sx={{ textAlign: 'center', mt: 3 }}>
                                 <UI_M.Typography variant="body2" color="text.secondary">
                                     Don't have an account?{' '}
-                                    <UI_M.Button
-                                        variant="text"
-                                        size="small"
-                                        className="signup-button"
-                                    >
-                                        Sign Up
-                                    </UI_M.Button>
+                                    <Link to="/sign-up" className="link-no-style">
+                                        <UI_M.Button
+                                            variant="text"
+                                            size="small"
+                                            className="signup-button"
+                                        >
+                                            Sign Up
+                                        </UI_M.Button>
+                                    </Link>
                                 </UI_M.Typography>
                                 <UI_M.Button
                                     variant="text"
